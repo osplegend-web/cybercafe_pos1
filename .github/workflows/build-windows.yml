@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   build-windows:
+    name: Build Windows EXE
     runs-on: windows-latest
 
     steps:
@@ -26,6 +27,12 @@ jobs:
 
       - name: Check Flutter
         run: flutter --version
+
+      - name: Enable Windows desktop
+        run: flutter config --enable-windows-desktop
+
+      - name: Generate Windows project
+        run: flutter create . --platforms=windows
 
       - name: Get dependencies
         run: flutter pub get
@@ -46,3 +53,4 @@ jobs:
         with:
           name: CyberCafePOS-Windows
           path: CyberCafePOS-Windows.zip
+          if-no-files-found: error
